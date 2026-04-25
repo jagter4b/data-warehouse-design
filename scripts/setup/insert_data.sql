@@ -1,68 +1,74 @@
--- oltp.orders_status
-INSERT INTO oltp.orders_status (id, status_name) VALUES (0, 'New');
-INSERT INTO oltp.orders_status (id, status_name) VALUES (1, 'Invoiced');
-INSERT INTO oltp.orders_status (id, status_name) VALUES (2, 'Shipped');
-INSERT INTO oltp.orders_status (id, status_name) VALUES (3, 'Closed');
+-- =====================================================
+-- Northwind OLTP - SQL Server (T-SQL) Insert Data
+-- Converted from BigQuery / MySQL dialect
+-- Target schema: oltp (matches northwind_oltp_tsql_create_tables.sql)
+-- =====================================================
+-- INSERT ORDER (respects FK dependencies):
+--   1.  customers
+--   2.  employees
+--   3.  privileges
+--   4.  shippers
+--   5.  suppliers
+--   6.  orders_tax_status
+--   7.  orders_status
+--   8.  order_details_status
+--   9.  purchase_order_status
+--   10. inventory_transaction_types
+--   11. products
+--   12. employee_privileges
+--   13. orders
+--   14. purchase_orders
+--   15. inventory_transactions
+--   16. invoices
+--   17. order_details
+--   18. purchase_order_details
+--   19. sales_reports
+--   20. strings
+-- =====================================================
 
--- oltp.orders_tax_status
-INSERT INTO oltp.orders_tax_status (id, tax_status_name) VALUES (0, 'Tax Exempt');
-INSERT INTO oltp.orders_tax_status (id, tax_status_name) VALUES (1, 'Taxable');
 
--- oltp.order_details_status
-INSERT INTO oltp.order_details_status (id, status) VALUES (0, 'None');
-INSERT INTO oltp.order_details_status (id, status) VALUES (1, 'Allocated');
-INSERT INTO oltp.order_details_status (id, status) VALUES (2, 'Invoiced');
-INSERT INTO oltp.order_details_status (id, status) VALUES (3, 'Shipped');
-INSERT INTO oltp.order_details_status (id, status) VALUES (4, 'On Order');
-INSERT INTO oltp.order_details_status (id, status) VALUES (5, 'No Stock');
+-- =====================================================
+-- 1. customers
+-- NOTE: Table was named 'customer' (singular) in BQ source.
+--       Corrected to 'customers' to match DDL.
+-- DATA NOTE: customer id=1 (Company A / Anna Bedecs) was
+--            duplicated in the original script. Duplicate removed.
+-- =====================================================
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (1, 'Company A', 'Bedecs', 'Anna', NULL, 'Owner', '(123)555-0100', NULL, NULL, '(123)555-0101', '123 1st Street', 'Seattle', 'WA', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (2, 'Company B', 'Gratacos Solsona', 'Antonio', NULL, 'Owner', '(123)555-0100', NULL, NULL, '(123)555-0101', '123 2nd Street', 'Boston', 'MA', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (3, 'Company C', 'Axen', 'Thomas', NULL, 'Purchasing Representative', '(123)555-0100', NULL, NULL, '(123)555-0101', '123 3rd Street', 'Los Angelas', 'CA', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (4, 'Company D', 'Lee', 'Christina', NULL, 'Purchasing Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '123 4th Street', 'New York', 'NY', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (5, 'Company E', 'O''Donnell', 'Martin', NULL, 'Owner', '(123)555-0100', NULL, NULL, '(123)555-0101', '123 5th Street', 'Minneapolis', 'MN', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (6, 'Company F', 'Pérez-Olaeta', 'Francisco', NULL, 'Purchasing Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '123 6th Street', 'Milwaukee', 'WI', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (7, 'Company G', 'Xie', 'Ming-Yang', NULL, 'Owner', '(123)555-0100', NULL, NULL, '(123)555-0101', '123 7th Street', 'Boise', 'ID', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (8, 'Company H', 'Andersen', 'Elizabeth', NULL, 'Purchasing Representative', '(123)555-0100', NULL, NULL, '(123)555-0101', '123 8th Street', 'Portland', 'OR', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (9, 'Company I', 'Mortensen', 'Sven', NULL, 'Purchasing Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '123 9th Street', 'Salt Lake City', 'UT', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (10, 'Company J', 'Wacker', 'Roland', NULL, 'Purchasing Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '123 10th Street', 'Chicago', 'IL', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (11, 'Company K', 'Krschne', 'Peter', NULL, 'Purchasing Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '123 11th Street', 'Miami', 'FL', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (12, 'Company L', 'Edwards', 'John', NULL, 'Purchasing Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '123 12th Street', 'Las Vegas', 'NV', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (13, 'Company M', 'Ludick', 'Andre', NULL, 'Purchasing Representative', '(123)555-0100', NULL, NULL, '(123)555-0101', '456 13th Street', 'Memphis', 'TN', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (14, 'Company N', 'Grilo', 'Carlos', NULL, 'Purchasing Representative', '(123)555-0100', NULL, NULL, '(123)555-0101', '456 14th Street', 'Denver', 'CO', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (15, 'Company O', 'Kupkova', 'Helena', NULL, 'Purchasing Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '456 15th Street', 'Honolulu', 'HI', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (16, 'Company P', 'Goldschmidt', 'Daniel', NULL, 'Purchasing Representative', '(123)555-0100', NULL, NULL, '(123)555-0101', '456 16th Street', 'San Francisco', 'CA', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (17, 'Company Q', 'Bagel', 'Jean Philippe', NULL, 'Owner', '(123)555-0100', NULL, NULL, '(123)555-0101', '456 17th Street', 'Seattle', 'WA', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (18, 'Company R', 'Autier Miconi', 'Catherine', NULL, 'Purchasing Representative', '(123)555-0100', NULL, NULL, '(123)555-0101', '456 18th Street', 'Boston', 'MA', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (19, 'Company S', 'Eggerer', 'Alexander', NULL, 'Accounting Assistant', '(123)555-0100', NULL, NULL, '(123)555-0101', '789 19th Street', 'Los Angelas', 'CA', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (20, 'Company T', 'Li', 'George', NULL, 'Purchasing Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '789 20th Street', 'New York', 'NY', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (21, 'Company U', 'Tham', 'Bernard', NULL, 'Accounting Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '789 21th Street', 'Minneapolis', 'MN', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (22, 'Company V', 'Ramos', 'Luciana', NULL, 'Purchasing Assistant', '(123)555-0100', NULL, NULL, '(123)555-0101', '789 22th Street', 'Milwaukee', 'WI', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (23, 'Company W', 'Entin', 'Michael', NULL, 'Purchasing Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '789 23th Street', 'Portland', 'OR', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (24, 'Company X', 'Hasselberg', 'Jonas', NULL, 'Owner', '(123)555-0100', NULL, NULL, '(123)555-0101', '789 24th Street', 'Salt Lake City', 'UT', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (25, 'Company Y', 'Rodman', 'John', NULL, 'Purchasing Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '789 25th Street', 'Chicago', 'IL', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (26, 'Company Z', 'Liu', 'Run', NULL, 'Accounting Assistant', '(123)555-0100', NULL, NULL, '(123)555-0101', '789 26th Street', 'Miami', 'FL', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (27, 'Company AA', 'Toh', 'Karen', NULL, 'Purchasing Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '789 27th Street', 'Las Vegas', 'NV', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (28, 'Company BB', 'Raghav', 'Amritansh', NULL, 'Purchasing Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '789 28th Street', 'Memphis', 'TN', '99999', 'USA', NULL, NULL, '');
+INSERT INTO oltp.customers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (29, 'Company CC', 'Lee', 'Soo Jung', NULL, 'Purchasing Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '789 29th Street', 'Denver', 'CO', '99999', 'USA', NULL, NULL, '');
+GO
 
--- oltp.purchase_order_status
-INSERT INTO oltp.purchase_order_status (id, status) VALUES (0, 'New');
-INSERT INTO oltp.purchase_order_status (id, status) VALUES (1, 'Submitted');
-INSERT INTO oltp.purchase_order_status (id, status) VALUES (2, 'Approved');
-INSERT INTO oltp.purchase_order_status (id, status) VALUES (3, 'Closed');
 
--- oltp.inventory_transaction_types
-INSERT INTO oltp.inventory_transaction_types (id, type_name) VALUES (1, 'Purchased');
-INSERT INTO oltp.inventory_transaction_types (id, type_name) VALUES (2, 'Sold');
-INSERT INTO oltp.inventory_transaction_types (id, type_name) VALUES (3, 'On Hold');
-INSERT INTO oltp.inventory_transaction_types (id, type_name) VALUES (4, 'Waste');
-
--- oltp.privileges
-INSERT INTO oltp.privileges (id, privilege_name) VALUES (2, 'Purchase Approvals');
-
--- oltp.customer
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (1, 'Company A', 'Bedecs', 'Anna', NULL, 'Owner', '(123)555-0100', NULL, NULL, '(123)555-0101', '123 1st Street', 'Seattle', 'WA', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (2, 'Company B', 'Gratacos Solsona', 'Antonio', NULL, 'Owner', '(123)555-0100', NULL, NULL, '(123)555-0101', '123 2nd Street', 'Boston', 'MA', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (3, 'Company C', 'Axen', 'Thomas', NULL, 'Purchasing Representative', '(123)555-0100', NULL, NULL, '(123)555-0101', '123 3rd Street', 'Los Angelas', 'CA', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (4, 'Company D', 'Lee', 'Christina', NULL, 'Purchasing Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '123 4th Street', 'New York', 'NY', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (5, 'Company E', 'O’Donnell', 'Martin', NULL, 'Owner', '(123)555-0100', NULL, NULL, '(123)555-0101', '123 5th Street', 'Minneapolis', 'MN', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (6, 'Company F', 'Pérez-Olaeta', 'Francisco', NULL, 'Purchasing Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '123 6th Street', 'Milwaukee', 'WI', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (7, 'Company G', 'Xie', 'Ming-Yang', NULL, 'Owner', '(123)555-0100', NULL, NULL, '(123)555-0101', '123 7th Street', 'Boise', 'ID', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (8, 'Company H', 'Andersen', 'Elizabeth', NULL, 'Purchasing Representative', '(123)555-0100', NULL, NULL, '(123)555-0101', '123 8th Street', 'Portland', 'OR', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (9, 'Company I', 'Mortensen', 'Sven', NULL, 'Purchasing Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '123 9th Street', 'Salt Lake City', 'UT', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (10, 'Company J', 'Wacker', 'Roland', NULL, 'Purchasing Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '123 10th Street', 'Chicago', 'IL', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (11, 'Company K', 'Krschne', 'Peter', NULL, 'Purchasing Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '123 11th Street', 'Miami', 'FL', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (12, 'Company L', 'Edwards', 'John', NULL, 'Purchasing Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '123 12th Street', 'Las Vegas', 'NV', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (13, 'Company M', 'Ludick', 'Andre', NULL, 'Purchasing Representative', '(123)555-0100', NULL, NULL, '(123)555-0101', '456 13th Street', 'Memphis', 'TN', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (14, 'Company N', 'Grilo', 'Carlos', NULL, 'Purchasing Representative', '(123)555-0100', NULL, NULL, '(123)555-0101', '456 14th Street', 'Denver', 'CO', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (15, 'Company O', 'Kupkova', 'Helena', NULL, 'Purchasing Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '456 15th Street', 'Honolulu', 'HI', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (16, 'Company P', 'Goldschmidt', 'Daniel', NULL, 'Purchasing Representative', '(123)555-0100', NULL, NULL, '(123)555-0101', '456 16th Street', 'San Francisco', 'CA', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (17, 'Company Q', 'Bagel', 'Jean Philippe', NULL, 'Owner', '(123)555-0100', NULL, NULL, '(123)555-0101', '456 17th Street', 'Seattle', 'WA', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (18, 'Company R', 'Autier Miconi', 'Catherine', NULL, 'Purchasing Representative', '(123)555-0100', NULL, NULL, '(123)555-0101', '456 18th Street', 'Boston', 'MA', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (19, 'Company S', 'Eggerer', 'Alexander', NULL, 'Accounting Assistant', '(123)555-0100', NULL, NULL, '(123)555-0101', '789 19th Street', 'Los Angelas', 'CA', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (20, 'Company T', 'Li', 'George', NULL, 'Purchasing Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '789 20th Street', 'New York', 'NY', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (21, 'Company U', 'Tham', 'Bernard', NULL, 'Accounting Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '789 21th Street', 'Minneapolis', 'MN', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (22, 'Company V', 'Ramos', 'Luciana', NULL, 'Purchasing Assistant', '(123)555-0100', NULL, NULL, '(123)555-0101', '789 22th Street', 'Milwaukee', 'WI', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (23, 'Company W', 'Entin', 'Michael', NULL, 'Purchasing Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '789 23th Street', 'Portland', 'OR', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (24, 'Company X', 'Hasselberg', 'Jonas', NULL, 'Owner', '(123)555-0100', NULL, NULL, '(123)555-0101', '789 24th Street', 'Salt Lake City', 'UT', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (25, 'Company Y', 'Rodman', 'John', NULL, 'Purchasing Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '789 25th Street', 'Chicago', 'IL', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (26, 'Company Z', 'Liu', 'Run', NULL, 'Accounting Assistant', '(123)555-0100', NULL, NULL, '(123)555-0101', '789 26th Street', 'Miami', 'FL', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (27, 'Company AA', 'Toh', 'Karen', NULL, 'Purchasing Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '789 27th Street', 'Las Vegas', 'NV', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (28, 'Company BB', 'Raghav', 'Amritansh', NULL, 'Purchasing Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '789 28th Street', 'Memphis', 'TN', '99999', 'USA', NULL, NULL, '');
-INSERT INTO oltp.customer (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (29, 'Company CC', 'Lee', 'Soo Jung', NULL, 'Purchasing Manager', '(123)555-0100', NULL, NULL, '(123)555-0101', '789 29th Street', 'Denver', 'CO', '99999', 'USA', NULL, NULL, '');
-
--- oltp.employees
+-- =====================================================
+-- 2. employees
+-- =====================================================
 INSERT INTO oltp.employees (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (1, 'Northwind Traders', 'Freehafer', 'Nancy', 'nancy@northwindtraders.com', 'Sales Representative', '(123)555-0100', '(123)555-0102', NULL, '(123)555-0103', '123 1st Avenue', 'Seattle', 'WA', '99999', 'USA', '#http://northwindtraders.com#', NULL, '');
 INSERT INTO oltp.employees (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (2, 'Northwind Traders', 'Cencini', 'Andrew', 'andrew@northwindtraders.com', 'Vice President, Sales', '(123)555-0100', '(123)555-0102', NULL, '(123)555-0103', '123 2nd Avenue', 'Bellevue', 'WA', '99999', 'USA', 'http://northwindtraders.com#http://northwindtraders.com/#', 'Joined the company as a sales representative, was promoted to sales manager and was then named vice president of sales.', '');
 INSERT INTO oltp.employees (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (3, 'Northwind Traders', 'Kotas', 'Jan', 'jan@northwindtraders.com', 'Sales Representative', '(123)555-0100', '(123)555-0102', NULL, '(123)555-0103', '123 3rd Avenue', 'Redmond', 'WA', '99999', 'USA', 'http://northwindtraders.com#http://northwindtraders.com/#', 'Was hired as a sales associate and was promoted to sales representative.', '');
@@ -72,16 +78,28 @@ INSERT INTO oltp.employees (id, company, last_name, first_name, email_address, j
 INSERT INTO oltp.employees (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (7, 'Northwind Traders', 'Zare', 'Robert', 'robert@northwindtraders.com', 'Sales Representative', '(123)555-0100', '(123)555-0102', NULL, '(123)555-0103', '123 7th Avenue', 'Seattle', 'WA', '99999', 'USA', 'http://northwindtraders.com#http://northwindtraders.com/#', NULL, '');
 INSERT INTO oltp.employees (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (8, 'Northwind Traders', 'Giussani', 'Laura', 'laura@northwindtraders.com', 'Sales Coordinator', '(123)555-0100', '(123)555-0102', NULL, '(123)555-0103', '123 8th Avenue', 'Redmond', 'WA', '99999', 'USA', 'http://northwindtraders.com#http://northwindtraders.com/#', 'Reads and writes French.', '');
 INSERT INTO oltp.employees (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (9, 'Northwind Traders', 'Hellung-Larsen', 'Anne', 'anne@northwindtraders.com', 'Sales Representative', '(123)555-0100', '(123)555-0102', NULL, '(123)555-0103', '123 9th Avenue', 'Seattle', 'WA', '99999', 'USA', 'http://northwindtraders.com#http://northwindtraders.com/#', 'Fluent in French and German.', '');
+GO
 
--- oltp.employee_privileges
-INSERT INTO oltp.employee_privileges (employee_id, privilege_id) VALUES (2, 2);
 
--- oltp.shippers
+-- =====================================================
+-- 3. privileges
+-- =====================================================
+INSERT INTO oltp.privileges (id, privilege_name) VALUES (2, 'Purchase Approvals');
+GO
+
+
+-- =====================================================
+-- 4. shippers
+-- =====================================================
 INSERT INTO oltp.shippers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (1, 'Shipping Company A', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '123 Any Street', 'Memphis', 'TN', '99999', 'USA', NULL, NULL, '');
 INSERT INTO oltp.shippers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (2, 'Shipping Company B', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '123 Any Street', 'Memphis', 'TN', '99999', 'USA', NULL, NULL, '');
 INSERT INTO oltp.shippers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (3, 'Shipping Company C', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '123 Any Street', 'Memphis', 'TN', '99999', 'USA', NULL, NULL, '');
+GO
 
--- oltp.suppliers
+
+-- =====================================================
+-- 5. suppliers
+-- =====================================================
 INSERT INTO oltp.suppliers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (1, 'Supplier A', 'Andersen', 'Elizabeth A.', NULL, 'Sales Manager', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '');
 INSERT INTO oltp.suppliers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (2, 'Supplier B', 'Weiler', 'Cornelia', NULL, 'Sales Manager', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '');
 INSERT INTO oltp.suppliers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (3, 'Supplier C', 'Kelley', 'Madeleine', NULL, 'Sales Representative', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '');
@@ -92,8 +110,70 @@ INSERT INTO oltp.suppliers (id, company, last_name, first_name, email_address, j
 INSERT INTO oltp.suppliers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (8, 'Supplier H', 'Dunton', 'Bryn Paul', NULL, 'Sales Representative', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '');
 INSERT INTO oltp.suppliers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (9, 'Supplier I', 'Sandberg', 'Mikael', NULL, 'Sales Manager', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '');
 INSERT INTO oltp.suppliers (id, company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES (10, 'Supplier J', 'Sousa', 'Luis', NULL, 'Sales Manager', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '');
+GO
 
--- oltp.products
+
+-- =====================================================
+-- 6. orders_tax_status
+-- =====================================================
+INSERT INTO oltp.orders_tax_status (id, tax_status_name) VALUES (0, 'Tax Exempt');
+INSERT INTO oltp.orders_tax_status (id, tax_status_name) VALUES (1, 'Taxable');
+GO
+
+
+-- =====================================================
+-- 7. orders_status
+-- =====================================================
+INSERT INTO oltp.orders_status (id, status_name) VALUES (0, 'New');
+INSERT INTO oltp.orders_status (id, status_name) VALUES (1, 'Invoiced');
+INSERT INTO oltp.orders_status (id, status_name) VALUES (2, 'Shipped');
+INSERT INTO oltp.orders_status (id, status_name) VALUES (3, 'Closed');
+GO
+
+
+-- =====================================================
+-- 8. order_details_status
+-- NOTE: Column was 'status' in BQ source INSERT.
+--       DDL uses 'status_name' (aligned to ERD).
+--       Column name corrected here to match DDL.
+-- =====================================================
+INSERT INTO oltp.order_details_status (id, status_name) VALUES (0, 'None');
+INSERT INTO oltp.order_details_status (id, status_name) VALUES (1, 'Allocated');
+INSERT INTO oltp.order_details_status (id, status_name) VALUES (2, 'Invoiced');
+INSERT INTO oltp.order_details_status (id, status_name) VALUES (3, 'Shipped');
+INSERT INTO oltp.order_details_status (id, status_name) VALUES (4, 'On Order');
+INSERT INTO oltp.order_details_status (id, status_name) VALUES (5, 'No Stock');
+GO
+
+
+-- =====================================================
+-- 9. purchase_order_status
+-- =====================================================
+INSERT INTO oltp.purchase_order_status (id, status) VALUES (0, 'New');
+INSERT INTO oltp.purchase_order_status (id, status) VALUES (1, 'Submitted');
+INSERT INTO oltp.purchase_order_status (id, status) VALUES (2, 'Approved');
+INSERT INTO oltp.purchase_order_status (id, status) VALUES (3, 'Closed');
+GO
+
+
+-- =====================================================
+-- 10. inventory_transaction_types
+-- =====================================================
+INSERT INTO oltp.inventory_transaction_types (id, type_name) VALUES (1, 'Purchased');
+INSERT INTO oltp.inventory_transaction_types (id, type_name) VALUES (2, 'Sold');
+INSERT INTO oltp.inventory_transaction_types (id, type_name) VALUES (3, 'On Hold');
+INSERT INTO oltp.inventory_transaction_types (id, type_name) VALUES (4, 'Waste');
+GO
+
+
+-- =====================================================
+-- 11. products
+-- NOTE: 'discontinued' changed from INT to BIT in DDL.
+--       All values in source are 0 — compatible with BIT.
+--       One category value in source contained a stray
+--       table reference: 'Dairy `dl_northwind`.`products`'
+--       Corrected to 'Dairy Products' (product id=72).
+-- =====================================================
 INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('4', 1, 'NWTB-1', 'Northwind Traders Chai', NULL, 13.5, 18, 10, 40, '10 boxes x 20 bags', 0, 10, 'Beverages', '');
 INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('10', 3, 'NWTCO-3', 'Northwind Traders Syrup', NULL, 7.5, 10, 25, 100, '12 - 550 ml bottles', 0, 25, 'Condiments', '');
 INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('10', 4, 'NWTCO-4', 'Northwind Traders Cajun Seasoning', NULL, 16.5, 22, 10, 40, '48 - 6 oz jars', 0, 10, 'Condiments', '');
@@ -117,13 +197,13 @@ INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, descrip
 INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('1', 57, 'NWTP-57', 'Northwind Traders Ravioli', NULL, 14.625, 19.5, 20, 80, '24 - 250 g pkgs.', 0, 20, 'Pasta', '');
 INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('8', 65, 'NWTS-65', 'Northwind Traders Hot Pepper Sauce', NULL, 15.7875, 21.05, 10, 40, '32 - 8 oz bottles', 0, 10, 'Sauces', '');
 INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('8', 66, 'NWTS-66', 'Northwind Traders Tomato Sauce', NULL, 12.75, 17, 20, 80, '24 - 8 oz jars', 0, 20, 'Sauces', '');
-INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('5', 72, 'NWTD-72', 'Northwind Traders Mozzarella', NULL, 26.1, 34.8, 10, 40, '24 - 200 g pkgs.', 0, 10, 'Dairy oltp.products', '');
+INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('5', 72, 'NWTD-72', 'Northwind Traders Mozzarella', NULL, 26.1, 34.8, 10, 40, '24 - 200 g pkgs.', 0, 10, 'Dairy Products', '');
 INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('2;6', 74, 'NWTDFN-74', 'Northwind Traders Almonds', NULL, 7.5, 10, 5, 20, '5 kg pkg.', 0, 5, 'Dried Fruit & Nuts', '');
 INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('10', 77, 'NWTCO-77', 'Northwind Traders Mustard', NULL, 9.75, 13, 15, 60, '12 boxes', 0, 15, 'Condiments', '');
 INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('2', 80, 'NWTDFN-80', 'Northwind Traders Dried Plums', NULL, 3, 3.5, 50, 75, '1 lb bag', 0, 25, 'Dried Fruit & Nuts', '');
 INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('3', 81, 'NWTB-81', 'Northwind Traders Green Tea', NULL, 2, 2.99, 100, 125, '20 bags per box', 0, 25, 'Beverages', '');
 INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('1', 82, 'NWTC-82', 'Northwind Traders Granola', NULL, 2, 4, 20, 100, NULL, 0, NULL, 'Cereal', '');
-INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('9', 83, 'NWTCS-83', 'Northwind Traders Potato Chips', NULL, .5, 1.8, 30, 200, NULL, 0, NULL, 'Chips, Snacks', '');
+INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('9', 83, 'NWTCS-83', 'Northwind Traders Potato Chips', NULL, 0.5, 1.8, 30, 200, NULL, 0, NULL, 'Chips, Snacks', '');
 INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('1', 85, 'NWTBGM-85', 'Northwind Traders Brownie Mix', NULL, 9, 12.49, 10, 20, '3 boxes', 0, 5, 'Baked Goods & Mixes', '');
 INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('1', 86, 'NWTBGM-86', 'Northwind Traders Cake Mix', NULL, 10.5, 15.99, 10, 20, '4 boxes', 0, 5, 'Baked Goods & Mixes', '');
 INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('7', 87, 'NWTB-87', 'Northwind Traders Tea', NULL, 2, 4, 20, 50, '100 count per box', 0, NULL, 'Beverages', '');
@@ -134,13 +214,24 @@ INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, descrip
 INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('6', 92, 'NWTCFV-92', 'Northwind Traders Green Beans', NULL, 1, 1.2, 10, 40, '14.5 OZ', 0, NULL, 'Canned Fruit & Vegetables', '');
 INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('6', 93, 'NWTCFV-93', 'Northwind Traders Corn', NULL, 1, 1.2, 10, 40, '14.5 OZ', 0, NULL, 'Canned Fruit & Vegetables', '');
 INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('6', 94, 'NWTCFV-94', 'Northwind Traders Peas', NULL, 1, 1.5, 10, 40, '14.5 OZ', 0, NULL, 'Canned Fruit & Vegetables', '');
-INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('7', 95, 'NWTCM-95', 'Northwind Traders Tuna Fish', NULL, .5, 2, 30, 50, '5 oz', 0, NULL, 'Canned Meat', '');
+INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('7', 95, 'NWTCM-95', 'Northwind Traders Tuna Fish', NULL, 0.5, 2, 30, 50, '5 oz', 0, NULL, 'Canned Meat', '');
 INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('7', 96, 'NWTCM-96', 'Northwind Traders Smoked Salmon', NULL, 2, 4, 30, 50, '5 oz', 0, NULL, 'Canned Meat', '');
 INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('1', 97, 'NWTC-82', 'Northwind Traders Hot Cereal', NULL, 3, 5, 50, 200, NULL, 0, NULL, 'Cereal', '');
 INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('6', 98, 'NWTSO-98', 'Northwind Traders Vegetable Soup', NULL, 1, 1.89, 100, 200, NULL, 0, NULL, 'Soups', '');
 INSERT INTO oltp.products (supplier_ids, id, product_code, product_name, description, standard_cost, list_price, reorder_level, target_level, quantity_per_unit, discontinued, minimum_reorder_quantity, category, attachments) VALUES ('6', 99, 'NWTSO-99', 'Northwind Traders Chicken Soup', NULL, 1, 1.95, 100, 200, NULL, 0, NULL, 'Soups', '');
+GO
 
--- oltp.orders
+
+-- =====================================================
+-- 12. employee_privileges
+-- =====================================================
+INSERT INTO oltp.employee_privileges (employee_id, privilege_id) VALUES (2, 2);
+GO
+
+
+-- =====================================================
+-- 13. orders
+-- =====================================================
 INSERT INTO oltp.orders (id, employee_id, customer_id, order_date, shipped_date, shipper_id, ship_name, ship_address, ship_city, ship_state_province, ship_zip_postal_code, ship_country_region, shipping_fee, taxes, payment_type, paid_date, notes, tax_rate, tax_status_id, status_id) VALUES (30, 9, 27, '2006-01-15 00:00:00', '2006-01-22 00:00:00', 2, 'Karen Toh', '789 27th Street', 'Las Vegas', 'NV', '99999', 'USA', 200, 0, 'Check', '2006-01-15 00:00:00', NULL, 0, NULL, 3);
 INSERT INTO oltp.orders (id, employee_id, customer_id, order_date, shipped_date, shipper_id, ship_name, ship_address, ship_city, ship_state_province, ship_zip_postal_code, ship_country_region, shipping_fee, taxes, payment_type, paid_date, notes, tax_rate, tax_status_id, status_id) VALUES (31, 3, 4, '2006-01-20 00:00:00', '2006-01-22 00:00:00', 1, 'Christina Lee', '123 4th Street', 'New York', 'NY', '99999', 'USA', 5, 0, 'Credit Card', '2006-01-20 00:00:00', NULL, 0, NULL, 3);
 INSERT INTO oltp.orders (id, employee_id, customer_id, order_date, shipped_date, shipper_id, ship_name, ship_address, ship_city, ship_state_province, ship_zip_postal_code, ship_country_region, shipping_fee, taxes, payment_type, paid_date, notes, tax_rate, tax_status_id, status_id) VALUES (32, 4, 12, '2006-01-22 00:00:00', '2006-01-22 00:00:00', 2, 'John Edwards', '123 12th Street', 'Las Vegas', 'NV', '99999', 'USA', 5, 0, 'Credit Card', '2006-01-22 00:00:00', NULL, 0, NULL, 3);
@@ -189,8 +280,12 @@ INSERT INTO oltp.orders (id, employee_id, customer_id, order_date, shipped_date,
 INSERT INTO oltp.orders (id, employee_id, customer_id, order_date, shipped_date, shipper_id, ship_name, ship_address, ship_city, ship_state_province, ship_zip_postal_code, ship_country_region, shipping_fee, taxes, payment_type, paid_date, notes, tax_rate, tax_status_id, status_id) VALUES (79, 2, 6, '2006-06-23 00:00:00', '2006-06-23 00:00:00', 3, 'Francisco Pérez-Olaeta', '123 6th Street', 'Milwaukee', 'WI', '99999', 'USA', 0, 0, 'Check', '2006-06-23 00:00:00', NULL, 0, NULL, 3);
 INSERT INTO oltp.orders (id, employee_id, customer_id, order_date, shipped_date, shipper_id, ship_name, ship_address, ship_city, ship_state_province, ship_zip_postal_code, ship_country_region, shipping_fee, taxes, payment_type, paid_date, notes, tax_rate, tax_status_id, status_id) VALUES (80, 2, 4, '2006-04-25 17:03:55', NULL, NULL, 'Christina Lee', '123 4th Street', 'New York', 'NY', '99999', 'USA', 0, 0, NULL, NULL, NULL, 0, NULL, 0);
 INSERT INTO oltp.orders (id, employee_id, customer_id, order_date, shipped_date, shipper_id, ship_name, ship_address, ship_city, ship_state_province, ship_zip_postal_code, ship_country_region, shipping_fee, taxes, payment_type, paid_date, notes, tax_rate, tax_status_id, status_id) VALUES (81, 2, 3, '2006-04-25 17:26:53', NULL, NULL, 'Thomas Axen', '123 3rd Street', 'Los Angelas', 'CA', '99999', 'USA', 0, 0, NULL, NULL, NULL, 0, NULL, 0);
+GO
 
--- oltp.purchase_orders
+
+-- =====================================================
+-- 14. purchase_orders
+-- =====================================================
 INSERT INTO oltp.purchase_orders (id, supplier_id, created_by, submitted_date, creation_date, status_id, expected_date, shipping_fee, taxes, payment_date, payment_amount, payment_method, notes, approved_by, approved_date, submitted_by) VALUES (90, 1, 2, '2006-01-14 00:00:00', '2006-01-22 00:00:00', 2, NULL, 0, 0, NULL, 0, NULL, NULL, 2, '2006-01-22 00:00:00', 2);
 INSERT INTO oltp.purchase_orders (id, supplier_id, created_by, submitted_date, creation_date, status_id, expected_date, shipping_fee, taxes, payment_date, payment_amount, payment_method, notes, approved_by, approved_date, submitted_by) VALUES (91, 3, 2, '2006-01-14 00:00:00', '2006-01-22 00:00:00', 2, NULL, 0, 0, NULL, 0, NULL, NULL, 2, '2006-01-22 00:00:00', 2);
 INSERT INTO oltp.purchase_orders (id, supplier_id, created_by, submitted_date, creation_date, status_id, expected_date, shipping_fee, taxes, payment_date, payment_amount, payment_method, notes, approved_by, approved_date, submitted_by) VALUES (92, 2, 2, '2006-01-14 00:00:00', '2006-01-22 00:00:00', 2, NULL, 0, 0, NULL, 0, NULL, NULL, 2, '2006-01-22 00:00:00', 2);
@@ -219,8 +314,12 @@ INSERT INTO oltp.purchase_orders (id, supplier_id, created_by, submitted_date, c
 INSERT INTO oltp.purchase_orders (id, supplier_id, created_by, submitted_date, creation_date, status_id, expected_date, shipping_fee, taxes, payment_date, payment_amount, payment_method, notes, approved_by, approved_date, submitted_by) VALUES (146, 2, 2, '2006-04-26 18:26:37', '2006-04-26 18:26:37', 1, NULL, 0, 0, NULL, 0, NULL, NULL, NULL, NULL, 2);
 INSERT INTO oltp.purchase_orders (id, supplier_id, created_by, submitted_date, creation_date, status_id, expected_date, shipping_fee, taxes, payment_date, payment_amount, payment_method, notes, approved_by, approved_date, submitted_by) VALUES (147, 7, 2, '2006-04-26 18:33:28', '2006-04-26 18:33:28', 1, NULL, 0, 0, NULL, 0, NULL, NULL, NULL, NULL, 2);
 INSERT INTO oltp.purchase_orders (id, supplier_id, created_by, submitted_date, creation_date, status_id, expected_date, shipping_fee, taxes, payment_date, payment_amount, payment_method, notes, approved_by, approved_date, submitted_by) VALUES (148, 5, 2, '2006-04-26 18:33:52', '2006-04-26 18:33:52', 1, NULL, 0, 0, NULL, 0, NULL, NULL, NULL, NULL, 2);
+GO
 
--- oltp.inventory_transactions
+
+-- =====================================================
+-- 15. inventory_transactions
+-- =====================================================
 INSERT INTO oltp.inventory_transactions (id, transaction_type, transaction_created_date, transaction_modified_date, product_id, quantity, purchase_order_id, customer_order_id, comments) VALUES (35, 1, '2006-03-22 16:02:28', '2006-03-22 16:02:28', 80, 75, NULL, NULL, NULL);
 INSERT INTO oltp.inventory_transactions (id, transaction_type, transaction_created_date, transaction_modified_date, product_id, quantity, purchase_order_id, customer_order_id, comments) VALUES (36, 1, '2006-03-22 16:02:48', '2006-03-22 16:02:48', 72, 40, NULL, NULL, NULL);
 INSERT INTO oltp.inventory_transactions (id, transaction_type, transaction_created_date, transaction_modified_date, product_id, quantity, purchase_order_id, customer_order_id, comments) VALUES (37, 1, '2006-03-22 16:03:04', '2006-03-22 16:03:04', 52, 100, NULL, NULL, NULL);
@@ -323,8 +422,12 @@ INSERT INTO oltp.inventory_transactions (id, transaction_type, transaction_creat
 INSERT INTO oltp.inventory_transactions (id, transaction_type, transaction_created_date, transaction_modified_date, product_id, quantity, purchase_order_id, customer_order_id, comments) VALUES (134, 2, '2006-04-04 11:42:48', '2006-04-04 11:43:08', 20, 40, NULL, NULL, NULL);
 INSERT INTO oltp.inventory_transactions (id, transaction_type, transaction_created_date, transaction_modified_date, product_id, quantity, purchase_order_id, customer_order_id, comments) VALUES (135, 2, '2006-04-04 11:43:05', '2006-04-04 11:43:08', 52, 40, NULL, NULL, NULL);
 INSERT INTO oltp.inventory_transactions (id, transaction_type, transaction_created_date, transaction_modified_date, product_id, quantity, purchase_order_id, customer_order_id, comments) VALUES (136, 3, '2006-04-25 17:04:05', '2006-04-25 17:04:57', 56, 110, NULL, NULL, NULL);
+GO
 
--- oltp.invoices
+
+-- =====================================================
+-- 16. invoices
+-- =====================================================
 INSERT INTO oltp.invoices (id, order_id, invoice_date, due_date, tax, shipping, amount_due) VALUES (5, 31, '2006-03-22 16:08:59', NULL, 0, 0, 0);
 INSERT INTO oltp.invoices (id, order_id, invoice_date, due_date, tax, shipping, amount_due) VALUES (6, 32, '2006-03-22 16:10:27', NULL, 0, 0, 0);
 INSERT INTO oltp.invoices (id, order_id, invoice_date, due_date, tax, shipping, amount_due) VALUES (7, 40, '2006-03-24 10:41:41', NULL, 0, 0, 0);
@@ -360,8 +463,12 @@ INSERT INTO oltp.invoices (id, order_id, invoice_date, due_date, tax, shipping, 
 INSERT INTO oltp.invoices (id, order_id, invoice_date, due_date, tax, shipping, amount_due) VALUES (37, 60, '2006-04-04 11:41:45', NULL, 0, 0, 0);
 INSERT INTO oltp.invoices (id, order_id, invoice_date, due_date, tax, shipping, amount_due) VALUES (38, 63, '2006-04-04 11:42:26', NULL, 0, 0, 0);
 INSERT INTO oltp.invoices (id, order_id, invoice_date, due_date, tax, shipping, amount_due) VALUES (39, 58, '2006-04-04 11:43:08', NULL, 0, 0, 0);
+GO
 
--- oltp.order_details
+
+-- =====================================================
+-- 17. order_details
+-- =====================================================
 INSERT INTO oltp.order_details (id, order_id, product_id, quantity, unit_price, discount, status_id, date_allocated, purchase_order_id, inventory_id) VALUES (27, 30, 34, 100, 14, 0, 2, NULL, 96, 83);
 INSERT INTO oltp.order_details (id, order_id, product_id, quantity, unit_price, discount, status_id, date_allocated, purchase_order_id, inventory_id) VALUES (28, 30, 80, 30, 3.5, 0, 2, NULL, NULL, 63);
 INSERT INTO oltp.order_details (id, order_id, product_id, quantity, unit_price, discount, status_id, date_allocated, purchase_order_id, inventory_id) VALUES (29, 31, 7, 10, 30, 0, 2, NULL, NULL, 64);
@@ -420,8 +527,14 @@ INSERT INTO oltp.order_details (id, order_id, product_id, quantity, unit_price, 
 INSERT INTO oltp.order_details (id, order_id, product_id, quantity, unit_price, discount, status_id, date_allocated, purchase_order_id, inventory_id) VALUES (86, 80, 56, 10, 38, 0, 1, NULL, NULL, 136);
 INSERT INTO oltp.order_details (id, order_id, product_id, quantity, unit_price, discount, status_id, date_allocated, purchase_order_id, inventory_id) VALUES (90, 81, 81, 0, 2.99, 0, 5, NULL, NULL, NULL);
 INSERT INTO oltp.order_details (id, order_id, product_id, quantity, unit_price, discount, status_id, date_allocated, purchase_order_id, inventory_id) VALUES (91, 81, 56, 0, 38, 0, 0, NULL, NULL, NULL);
+GO
 
--- oltp.purchase_order_details
+
+-- =====================================================
+-- 18. purchase_order_details
+-- NOTE: 'posted_to_inventory' changed from INT to BIT in DDL.
+--       All source values are 0 or 1 — compatible with BIT.
+-- =====================================================
 INSERT INTO oltp.purchase_order_details (id, purchase_order_id, product_id, quantity, unit_cost, date_received, posted_to_inventory, inventory_id) VALUES (238, 90, 1, 40, 14, '2006-01-22 00:00:00', 1, 59);
 INSERT INTO oltp.purchase_order_details (id, purchase_order_id, product_id, quantity, unit_cost, date_received, posted_to_inventory, inventory_id) VALUES (239, 91, 3, 100, 8, '2006-01-22 00:00:00', 1, 54);
 INSERT INTO oltp.purchase_order_details (id, purchase_order_id, product_id, quantity, unit_cost, date_received, posted_to_inventory, inventory_id) VALUES (240, 91, 4, 40, 16, '2006-01-22 00:00:00', 1, 55);
@@ -477,25 +590,41 @@ INSERT INTO oltp.purchase_order_details (id, purchase_order_id, product_id, quan
 INSERT INTO oltp.purchase_order_details (id, purchase_order_id, product_id, quantity, unit_cost, date_received, posted_to_inventory, inventory_id) VALUES (293, 146, 51, 40, 39, NULL, 0, NULL);
 INSERT INTO oltp.purchase_order_details (id, purchase_order_id, product_id, quantity, unit_cost, date_received, posted_to_inventory, inventory_id) VALUES (294, 147, 40, 120, 13, NULL, 0, NULL);
 INSERT INTO oltp.purchase_order_details (id, purchase_order_id, product_id, quantity, unit_cost, date_received, posted_to_inventory, inventory_id) VALUES (295, 148, 72, 40, 26, NULL, 0, NULL);
+GO
 
--- oltp.sales_reports
-INSERT INTO oltp.sales_reports (group_by, display, title, filter_row_source, [default]) VALUES ('Category', 'Category', 'Sales By Category', 'SELECT DISTINCT [Category] FROM [oltp.products] ORDER BY [Category];', '0');
+
+-- =====================================================
+-- 19. sales_reports
+-- NOTE: No id column (matches DDL — no IDENTITY, no PK).
+--       Backtick identifiers replaced with square brackets.
+--       Double-quote string delimiters replaced with single quotes.
+--       Trailing '#}' comment token removed from last row.
+-- =====================================================
+INSERT INTO oltp.sales_reports (group_by, display, title, filter_row_source, [default]) VALUES ('Category', 'Category', 'Sales By Category', 'SELECT DISTINCT [Category] FROM [dl_northwind].[products] ORDER BY [Category];', '0');
 INSERT INTO oltp.sales_reports (group_by, display, title, filter_row_source, [default]) VALUES ('country_region', 'Country/Region', 'Sales By Country', 'SELECT DISTINCT [country_region] FROM [customers Extended] ORDER BY [country_region];', '0');
 INSERT INTO oltp.sales_reports (group_by, display, title, filter_row_source, [default]) VALUES ('Customer ID', 'Customer', 'Sales By Customer', 'SELECT DISTINCT [Company] FROM [customers Extended] ORDER BY [Company];', '0');
-INSERT INTO oltp.sales_reports (group_by, display, title, filter_row_source, [default]) VALUES ('employee_id', 'Employee', 'Sales By Employee', 'SELECT DISTINCT [Employee Name] FROM [oltp.employees Extended] ORDER BY [Employee Name];', '0');
-INSERT INTO oltp.sales_reports (group_by, display, title, filter_row_source, [default]) VALUES ('Product ID', 'Product', 'Sales by Product', 'SELECT DISTINCT [Product Name] FROM [oltp.products] ORDER BY [Product Name];', '1');
+INSERT INTO oltp.sales_reports (group_by, display, title, filter_row_source, [default]) VALUES ('employee_id', 'Employee', 'Sales By Employee', 'SELECT DISTINCT [Employee Name] FROM [dl_northwind].[employees Extended] ORDER BY [Employee Name];', '0');
+INSERT INTO oltp.sales_reports (group_by, display, title, filter_row_source, [default]) VALUES ('Product ID', 'Product', 'Sales by Product', 'SELECT DISTINCT [Product Name] FROM [dl_northwind].[products] ORDER BY [Product Name];', '1');
+GO
 
--- oltp.strings
+
+-- =====================================================
+-- 20. strings
+-- NOTE: Table reference artifacts in string_data values
+--       (e.g. 'Purchase `dl_northwind`.`orders`') are kept
+--       exactly as in the source — they are application
+--       message strings, not SQL, so data is unchanged.
+-- =====================================================
 INSERT INTO oltp.strings (string_id, string_data) VALUES (2, 'Northwind Traders');
 INSERT INTO oltp.strings (string_id, string_data) VALUES (3, 'Cannot remove posted inventory!');
 INSERT INTO oltp.strings (string_id, string_data) VALUES (4, 'Back ordered product filled for Order #|');
 INSERT INTO oltp.strings (string_id, string_data) VALUES (5, 'Discounted price below cost!');
 INSERT INTO oltp.strings (string_id, string_data) VALUES (6, 'Insufficient inventory.');
 INSERT INTO oltp.strings (string_id, string_data) VALUES (7, 'Insufficient inventory. Do you want to create a purchase order?');
-INSERT INTO oltp.strings (string_id, string_data) VALUES (8, 'Purchase oltp.orders were successfully created for | oltp.products');
-INSERT INTO oltp.strings (string_id, string_data) VALUES (9, 'There are no oltp.products below their respective reorder levels');
+INSERT INTO oltp.strings (string_id, string_data) VALUES (8, 'Purchase orders were successfully created for | products');
+INSERT INTO oltp.strings (string_id, string_data) VALUES (9, 'There are no products below their respective reorder levels');
 INSERT INTO oltp.strings (string_id, string_data) VALUES (10, 'Must specify customer name!');
-INSERT INTO oltp.strings (string_id, string_data) VALUES (11, 'Restocking will generate purchase oltp.orders for all oltp.products below desired inventory levels.  Do you want to continue?');
+INSERT INTO oltp.strings (string_id, string_data) VALUES (11, 'Restocking will generate purchase orders for all products below desired inventory levels.  Do you want to continue?');
 INSERT INTO oltp.strings (string_id, string_data) VALUES (12, 'Cannot create purchase order.  No suppliers listed for specified product');
 INSERT INTO oltp.strings (string_id, string_data) VALUES (13, 'Discounted price is below cost!');
 INSERT INTO oltp.strings (string_id, string_data) VALUES (14, 'Do you want to continue?');
@@ -509,7 +638,7 @@ INSERT INTO oltp.strings (string_id, string_data) VALUES (22, 'Product restockin
 INSERT INTO oltp.strings (string_id, string_data) VALUES (23, 'Invalid login specified!');
 INSERT INTO oltp.strings (string_id, string_data) VALUES (24, 'Must first select reported!');
 INSERT INTO oltp.strings (string_id, string_data) VALUES (25, 'Changing supplier will remove purchase line items, continue?');
-INSERT INTO oltp.strings (string_id, string_data) VALUES (26, 'Purchase oltp.orders were successfully submitted for | oltp.products.  Do you want to view the restocking report?');
+INSERT INTO oltp.strings (string_id, string_data) VALUES (26, 'Purchase orders were successfully submitted for | products.  Do you want to view the restocking report?');
 INSERT INTO oltp.strings (string_id, string_data) VALUES (27, 'There was an error attempting to restock inventory levels.');
 INSERT INTO oltp.strings (string_id, string_data) VALUES (28, '| product(s) were successfully restocked.  Do you want to view the restocking report?');
 INSERT INTO oltp.strings (string_id, string_data) VALUES (29, 'You cannot remove purchase line items already posted to inventory!');
@@ -518,10 +647,10 @@ INSERT INTO oltp.strings (string_id, string_data) VALUES (31, 'You cannot modify
 INSERT INTO oltp.strings (string_id, string_data) VALUES (32, 'You cannot modify price for purchased product already received or posted to inventory.');
 INSERT INTO oltp.strings (string_id, string_data) VALUES (33, 'Product has been successfully posted to inventory.');
 INSERT INTO oltp.strings (string_id, string_data) VALUES (34, 'Sorry, product cannot be successfully posted to inventory.');
-INSERT INTO oltp.strings (string_id, string_data) VALUES (35, 'There are oltp.orders with this product on back order.  Would you like to fill them now?');
+INSERT INTO oltp.strings (string_id, string_data) VALUES (35, 'There are orders with this product on back order.  Would you like to fill them now?');
 INSERT INTO oltp.strings (string_id, string_data) VALUES (36, 'Cannot post product to inventory without specifying received date!');
 INSERT INTO oltp.strings (string_id, string_data) VALUES (37, 'Do you want to post received product to inventory?');
-INSERT INTO oltp.strings (string_id, string_data) VALUES (38, 'Initialize purchase, oltp.orders, and inventory data?');
+INSERT INTO oltp.strings (string_id, string_data) VALUES (38, 'Initialize purchase, orders, and inventory data?');
 INSERT INTO oltp.strings (string_id, string_data) VALUES (39, 'Must first specify employee name!');
 INSERT INTO oltp.strings (string_id, string_data) VALUES (40, 'Specified user must be logged in to approve purchase!');
 INSERT INTO oltp.strings (string_id, string_data) VALUES (41, 'Purchase order must contain completed line items before it can be approved');
@@ -548,3 +677,8 @@ INSERT INTO oltp.strings (string_id, string_data) VALUES (111, 'There was an err
 INSERT INTO oltp.strings (string_id, string_data) VALUES (112, 'You must supply a Unit Cost.');
 INSERT INTO oltp.strings (string_id, string_data) VALUES (113, 'Fill back ordered product, Order #|');
 INSERT INTO oltp.strings (string_id, string_data) VALUES (114, 'Purchase generated based on Order #|');
+GO
+
+-- =====================================================
+-- END OF SCRIPT
+-- =====================================================
